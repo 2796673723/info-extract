@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 app.get("/extract", async (req, res) => {
   const { extractUrl } = req.query;
-  let info = await extractor.extactInfo(extractUrl);
+  let info = await extractor.extractInfo(extractUrl);
   res.send(JSON.stringify(info));
 });
 

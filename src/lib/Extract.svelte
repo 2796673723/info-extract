@@ -22,6 +22,3 @@
 {#if (Object.keys($info).length > 0)}
     <InfoList/>
 {/if}
-<!--{#each Object.entries($info) as [key, value]}-->
-<!--    <p>{key} : {value}</p>-->
-<!--{/each}-->
