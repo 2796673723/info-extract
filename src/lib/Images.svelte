@@ -3,12 +3,17 @@
     import {extractImages} from "./store";
 
     let images = extractImages.getLinks()
+
+    function deleteImageLink(index) {
+        extractImages.delete(index)
+    }
 </script>
 
 <LayoutGrid>
     {#each $images as link, i}
         <Cell span={2}>
             <div class="img-container">
+                <button on:click={()=>{deleteImageLink(i)}}>删除</button>
                 <img src={link} alt={`Image ${i + 1}`}>
             </div>
         </Cell>
@@ -17,7 +22,7 @@
 
 <style>
     .img-container {
-        height:100%;
+        height: 100%;
         display: flex;
         text-align: center;
         align-items: center;
