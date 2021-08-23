@@ -30,5 +30,30 @@ class InfoClass {
   }
 }
 
+class ImageLinks {
+  #links = writable([]);
+
+  clear() {
+    this.#links.set([]);
+  }
+
+  init(obj) {
+    this.#links.set(obj);
+  }
+
+  put(value) {
+    this.#links.update((links) => [...links, value]);
+  }
+
+  delete(index) {
+    this.#links.update((links) => links.filter((_, i) => i !== index));
+  }
+
+  getLinks() {
+    return this.#links;
+  }
+}
+
 export const extractUrl = writable("");
 export const extractInfo = new InfoClass();
+export const extractImages = new ImageLinks();

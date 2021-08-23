@@ -1,5 +1,5 @@
 <script>
-    import {extractUrl, extractInfo} from "./store";
+    import {extractUrl, extractInfo, extractImages} from "./store";
     import InfoList from "./Extract/InfoList.svelte";
 
     const extractRoute = "http://localhost:5000/extract"
@@ -8,6 +8,7 @@
 
     $:if ($extractUrl !== "") {
         extractInfo.clear()
+        extractImages.clear()
         let url = `${extractRoute}?extractUrl=${$extractUrl}`;
         extractUrlInfo(url);
     }
@@ -15,7 +16,9 @@
     async function extractUrlInfo(url) {
         let response = await fetch(url);
         let info = await response.json();
-        extractInfo.init(info)
+        console.log(info)
+        extractInfo.init(info.attribute);
+        extractImages.init(info.imageLinks);
     }
 </script>
 

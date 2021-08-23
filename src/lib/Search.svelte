@@ -7,7 +7,7 @@
 
     let context = ""
     let links = []
-    let start = 1;
+    let start = 1
 
     async function searchResult() {
         extractUrl.set("")
