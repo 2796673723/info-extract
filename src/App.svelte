@@ -3,12 +3,15 @@
     import Extract from "./lib/Extract.svelte";
     import Test from "./lib/Test.svelte";
     import Images from "./lib/Images.svelte";
+    import IframeDemo from "./lib/IframeDemo.svelte";
 </script>
 
 <main>
     <Test/>
     <hr>
     <Search/>
+    <hr>
+    <IframeDemo/>
     <hr>
     <Extract/>
     <hr/>

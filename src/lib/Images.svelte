@@ -7,18 +7,30 @@
     function deleteImageLink(index) {
         extractImages.delete(index)
     }
+
+    function addImageLink() {
+        console.log("add image")
+        let url = globalThis.prompt("输入图片链接", "")
+        extractImages.put(url)
+    }
 </script>
+
+<button on:click={()=>addImageLink()}>添加图片</button><br>
 
 <LayoutGrid>
     {#each $images as link, i}
-        <Cell span={2}>
-            <div class="img-container">
+        <Cell span={2} style="border:2px solid black">
+            <div>
                 <button on:click={()=>{deleteImageLink(i)}}>删除</button>
-                <img src={link} alt={`Image ${i + 1}`}>
+                <br>
+                <div class="img-container">
+                    <img src={link} alt={`Image ${i + 1}`}>
+                </div>
             </div>
         </Cell>
     {/each}
 </LayoutGrid>
+
 
 <style>
     .img-container {
@@ -26,12 +38,10 @@
         display: flex;
         text-align: center;
         align-items: center;
-        /*vertical-align:middle;*/
-        /*height: 100px;*/
-        /*width: 150px;*/
     }
 
     .img-container img {
+        max-height: 200px;
         height: auto;
         width: 100%;
     }

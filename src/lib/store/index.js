@@ -57,3 +57,4 @@ class ImageLinks {
 export const extractUrl = writable("");
 export const extractInfo = new InfoClass();
 export const extractImages = new ImageLinks();
+export const exportUrl = writable("");

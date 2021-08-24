@@ -3,7 +3,7 @@
     const key = "AIzaSyBdwZ8mD2Qp6B_dTB2aoXVKsydyCFxmDsM"
     const cx = "e3f5f8fb47d86da45"
 
-    import {extractUrl} from "./store";
+    import {extractUrl, exportUrl} from "./store";
 
     let context = ""
     let links = []
@@ -11,6 +11,7 @@
 
     async function searchResult() {
         extractUrl.set("")
+        exportUrl.set("")
         start = 1
         links = []
         let searchUrl = `${url}?key=${key}&cx=${cx}&q=${context}`
@@ -48,6 +49,7 @@
         {#each links as [link, title],index (index)}
             <a href="javascript:void(0);" on:click={()=>{window.open(link)}}>{title}</a>&nbsp;
             <button on:click={()=>removeLink(index)}>删除</button>
+            <button type="button" on:click={()=>exportUrl.set(link)}>预览</button>
             <br>
         {/each}
     {/if}
