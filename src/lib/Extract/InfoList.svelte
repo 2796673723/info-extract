@@ -6,11 +6,11 @@
 </script>
 
 <table>
-    <tr>
-        <th>属性</th>
-        <th>数值</th>
-    </tr>
+    <!--    <tr>-->
+    <!--        <th>属性</th>-->
+    <!--        <th>数值</th>-->
+    <!--    </tr>-->
     {#each Object.entries($info) as [attribute, value],index (index)}
-        <InfoItem {...{attribute, value}}/>
+        <InfoItem {...{previousAttribute: attribute, attribute, value}}/>
     {/each}
 </table>
