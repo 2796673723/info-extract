@@ -22,7 +22,7 @@
 </script>
 
 <tr>
-    <td>{previousAttribute}</td>
+<!--    <td>{previousAttribute}</td>-->
     <td><input type="text" bind:value={attribute}></td>
     <td><input type="text" bind:value={value}></td>
     <td>

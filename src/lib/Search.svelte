@@ -3,11 +3,14 @@
     const key = "AIzaSyBdwZ8mD2Qp6B_dTB2aoXVKsydyCFxmDsM"
     const cx = "e3f5f8fb47d86da45"
 
-    import {extractUrl, exportUrl} from "./store";
+    import {extractUrl, exportUrl, extractInfo, extractImages} from "./store";
 
     let context = ""
     let links = []
     let start = 1
+
+    let attribute = extractInfo.getJson();
+    let imageLinks = extractImages.getLinks();
 
     async function searchResult() {
         extractUrl.set("")
@@ -38,12 +41,23 @@
     function removeLink(removeIndex) {
         links = links.filter((_, index) => index !== removeIndex)
     }
+
+    function outputResult() {
+
+        let output = {
+            links: links,
+            attribute: $attribute,
+            imagesLinks: $imageLinks,
+        }
+        console.log(JSON.stringify(output))
+    }
 </script>
 
 <div>
     <input type="text" bind:value={context}>
     <button type="button" on:click={searchResult}>确定</button>
-    <button type="button" on:click={addSearchResult}>添加结果</button>
+    <button type="button" on:click={addSearchResult}>添加后续结果</button>
+    <button type="button" on:click={outputResult}>输出</button>
     <hr>
     {#if links.length > 0}
         {#each links as [link, title],index (index)}
