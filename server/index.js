@@ -1,6 +1,7 @@
 import express from "express";
 import { Extractor } from "./extract.js";
 import cors from "cors";
+
 const app = express();
 const port = 5000;
 
@@ -11,6 +12,18 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World");
+});
+
+app.get("/searchAndExtract", async (req, res) => {
+  const { keyWord, start } = req.query;
+  let info = await extractor.SearchAndExtract(keyWord, start);
+  res.send(JSON.stringify(info));
+});
+
+app.get("/search", async (req, res) => {
+  const { keyWord, start } = req.query;
+  let info = await extractor.PageSearch(keyWord, start);
+  res.send(JSON.stringify(info));
 });
 
 app.get("/extract", async (req, res) => {

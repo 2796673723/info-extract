@@ -3,6 +3,7 @@
 </script>
 
 {#if $exportUrl !== ""}
+    <hr>
     <button on:click={()=>exportUrl.set("")}>关闭</button>
     <br>
     <iframe src={$exportUrl}></iframe>

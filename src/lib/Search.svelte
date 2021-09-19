@@ -3,47 +3,52 @@
     const key = "AIzaSyBdwZ8mD2Qp6B_dTB2aoXVKsydyCFxmDsM"
     const cx = "e3f5f8fb47d86da45"
 
-    import {extractUrl, exportUrl, extractInfo, extractImages} from "./store";
+    import {exportUrl, extractInfo, extractImages} from "./store";
 
     let context = ""
     let links = []
-    let start = 1
+    let start = 0
 
     let attribute = extractInfo.getJson();
     let imageLinks = extractImages.getLinks();
 
-    async function searchResult() {
-        extractUrl.set("")
-        exportUrl.set("")
-        start = 1
+    globalThis.getExtractInfo = () => ({links, attribute: $attribute, imageLinks: $imageLinks})
+
+    function initExtract() {
+        start = 0
         links = []
-        let searchUrl = `${url}?key=${key}&cx=${cx}&q=${context}`
+        extractInfo.clear()
+        extractImages.clear()
+    }
+
+    async function searchResult() {
+        exportUrl.set("")
+
+        initExtract()
+
+        let searchUrl = `http://localhost:5000/searchAndExtract?keyWord=${context}&start=${start}`;
         let response = await fetch(searchUrl);
-        let result = await response.json()
-        for (const item of result?.items) {
-            if (item.link.includes("wikipedia.org") && $extractUrl === "") extractUrl.set(item.link)
-            links.push([item.link, item.title])
-        }
+        let {urlLinks, attribute: resAttribute, imageLinks: resImageLinks} = await response.json();
+        links = [...urlLinks];
+        extractInfo.init(resAttribute);
+        extractImages.init(resImageLinks);
     }
 
     async function addSearchResult() {
         console.log("start to add")
         start += 10
-        let searchUrl = `${url}?key=${key}&cx=${cx}&q=${context}&start=${start}`
+        let searchUrl = `http://localhost:5000/search?keyWord=${context}&start=${start}`;
         let response = await fetch(searchUrl);
-        let result = await response.json()
-        for (const item of result?.items) {
-            links.push([item.link, item.title])
-        }
-        links = [...links]
+        let addLink = await response.json();
+        links = [...links, ...addLink];
     }
+
 
     function removeLink(removeIndex) {
         links = links.filter((_, index) => index !== removeIndex)
     }
 
     function outputResult() {
-
         let output = {
             links: links,
             attribute: $attribute,
@@ -51,6 +56,8 @@
         }
         console.log(JSON.stringify(output))
     }
+
+
 </script>
 
 <div>

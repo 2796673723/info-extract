@@ -10,7 +10,6 @@
     <Test/>
     <hr>
     <Search/>
-    <hr>
     <IframeDemo/>
     <hr>
     <Extract/>

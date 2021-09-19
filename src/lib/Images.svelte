@@ -9,7 +9,6 @@
     }
 
     function addImageLink() {
-        // console.log("add image")
         let url = globalThis.prompt("输入图片链接", "")
         if (url) extractImages.put(url)
     }

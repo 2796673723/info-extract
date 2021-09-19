@@ -1,5 +1,5 @@
 <script>
-    import {extractUrl, extractInfo, extractImages} from "./store";
+    import {extractInfo} from "./store";
     import InfoList from "./Extract/InfoList.svelte";
     import AttributeDialog from "./Extract/AttributeDialog.svelte";
 
@@ -12,20 +12,20 @@
     const addAttribute = (key, value) => extractInfo.put(key, value);
 
 
-    $:if ($extractUrl !== "") {
-        extractInfo.clear()
-        extractImages.clear()
-        let url = `${extractRoute}?extractUrl=${$extractUrl}`;
-        extractUrlInfo(url);
-    }
+    // $:if ($extractUrl !== "") {
+    //     extractInfo.clear()
+    //     extractImages.clear()
+    //     let url = `${extractRoute}?extractUrl=${$extractUrl}`;
+    //     extractUrlInfo(url);
+    // }
 
-    async function extractUrlInfo(url) {
-        let response = await fetch(url);
-        let info = await response.json();
-        console.log(info)
-        extractInfo.init(info.attribute);
-        extractImages.init(info.imageLinks);
-    }
+    // async function extractUrlInfo(url) {
+    //     let response = await fetch(url);
+    //     let info = await response.json();
+    //     console.log(info)
+    //     extractInfo.init(info.attribute);
+    //     extractImages.init(info.imageLinks);
+    // }
 </script>
 
 <AttributeDialog {addAttribute}/>
